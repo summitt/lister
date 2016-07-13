@@ -15,3 +15,10 @@ Connection from  192.168.1.128 to port 33
 Connection from  192.168.1.128 to port 100
 Connection from  192.168.1.128 to port 500
 ```
+
+Requirements
+
+```
+pip install pypcap
+pip install dpkt
+```
