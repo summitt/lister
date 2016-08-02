@@ -3,13 +3,13 @@ import dpkt
 import socket
 import sys, getopt
 from array import *
+import netifaces as ni
 
 
-def sniff(local):
-	print 'Listening for connections...'
-	print 'FYI-I will only show new unique connections.'
+def sniff(local, iface):
+	print '**Note: Lister.py will only show new unique connections.'
 	connections = []
-	pc = pcap.pcap(immediate=True)
+	pc = pcap.pcap(iface, immediate=True)
 	pc.setfilter('tcp')
 	for dual in pc:
 		if(dual ==None):
@@ -37,20 +37,25 @@ def sniff(local):
 
 
 def main(argv):
-	local='192.168.1.129'
+	#local='192.168.1.129'
    	try:
-		opts, args = getopt.getopt(argv,"hl:",["local="])
+		opts, args = getopt.getopt(argv,"hl:i:",["local=", "interface="])
    	except getopt.GetoptError:
-		print 'lister.py -l <localIp>'
+		print 'lister.py -i <interface>'
 		sys.exit(2)
    	for opt, arg in opts:
 		if opt == '-h':
-			print 'lister.py -l <localIp>'
+			print 'lister.py -i <interface>'
 			sys.exit()
 		elif opt in ("-l", "--local"):
 			local = arg
+		elif opt in ("-i", "--interface"):
+			iface = arg
+	ni.ifaddresses(iface)
+	local = ni.ifaddresses(iface)[2][0]['addr']
+	print 'Listening on ' + iface + " (" + local + ")"
 
-	sniff(local)
+	sniff(local,iface)
 
 
 
