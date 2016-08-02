@@ -7,15 +7,15 @@ Usage
 
 
 ```
-$ python ./lister.py -l 192.168.1.129
-
-Listening for connections...
-FYI-I will only show new unique connections.
-Connection from  192.168.1.128 to port 8888
-Connection from  192.168.1.128 to port 443
-Connection from  192.168.1.128 to port 33
-Connection from  192.168.1.128 to port 100
-Connection from  192.168.1.128 to port 500
+$ sudo python ./lister.py -i en1
+Listening on en1 (192.168.1.128)
+**Note: Lister.py will only show new unique connections.
+Connection from  192.168.1.198 to port 443
+Connection from  192.168.1.198 to port 993
+Connection from  192.168.1.224 to port 443
+Connection from  192.168.1.224 to port 80
+Connection from  192.168.1.224 to port 49152
+Connection from  192.168.1.224 to port 15000
 ```
 
 Requirements
@@ -23,4 +23,5 @@ Requirements
 ```
 $ pip install pypcap
 $ pip install dpkt
+$ pip install netifaces
 ```
